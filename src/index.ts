@@ -35,6 +35,20 @@ export type {
   LiquidityPool
 } from './strategy/route-optimizer.js';
 
+export { DynamicPricing } from './strategy/dynamic-pricing.js';
+export type {
+  PricingConfig,
+  AdjustmentFactor,
+  MarketData,
+  CompetitorPrice,
+  HistoricalDataPoint,
+  PriceRecommendation,
+  FactorContribution,
+  ABTestVariant,
+  PricingMetrics,
+  ABTestResults
+} from './strategy/dynamic-pricing.js';
+
 // ML & Fraud Detection
 export { FraudDetector } from './ml/fraud-detector.js';
 export type {
