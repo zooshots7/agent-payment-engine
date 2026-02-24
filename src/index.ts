@@ -23,6 +23,18 @@ export type {
   YieldReport
 } from './strategy/yield-optimizer.js';
 
+export { RouteOptimizer } from './strategy/route-optimizer.js';
+export type {
+  ChainId,
+  Chain,
+  Bridge,
+  RouteHop,
+  RouteResult,
+  RouteConfig,
+  GasPrice,
+  LiquidityPool
+} from './strategy/route-optimizer.js';
+
 // Type exports
 export * from './types/agent.js';
 export * from './types/payment.js';
