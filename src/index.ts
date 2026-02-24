@@ -14,6 +14,15 @@ export { AgentWallet, MultiSigWallet } from './core/wallet.js';
 export { SolanaManager } from './core/solana.js';
 export { X402PaymentHandler } from './core/x402.js';
 
+// Strategy & Optimization
+export { YieldOptimizer } from './strategy/yield-optimizer.js';
+export type {
+  Protocol,
+  YieldStrategy,
+  ProtocolPosition,
+  YieldReport
+} from './strategy/yield-optimizer.js';
+
 // Type exports
 export * from './types/agent.js';
 export * from './types/payment.js';
