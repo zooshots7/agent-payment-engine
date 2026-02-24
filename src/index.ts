@@ -3,10 +3,16 @@
  * Autonomous AI agent orchestration for payment systems
  */
 
-// Core exports
+// Agent Management
 export { AgentRegistry } from './agents/registry.js';
 export { AgentManager } from './agents/manager.js';
+export { AgentProtocol } from './agents/protocol.js';
 export { YAMLLoader } from './utils/yaml-loader.js';
+
+// Core Payment Infrastructure
+export { AgentWallet, MultiSigWallet } from './core/wallet.js';
+export { SolanaManager } from './core/solana.js';
+export { X402PaymentHandler } from './core/x402.js';
 
 // Type exports
 export * from './types/agent.js';
