@@ -1,0 +1,57 @@
+# Yield Optimizer Agent
+# Automatically moves idle balances to highest-yield DeFi protocols
+
+name: "yield-optimizer"
+type: "optimizer"
+
+capabilities:
+  - optimize_yield
+  - evaluate_service
+  - execute_payment
+
+rules:
+  maxTransaction: 10000  # USDC
+  requireApprovalAbove: 5000  # USDC
+  allowedChains:
+    - solana
+    - base
+
+# Yield optimization settings
+strategy:
+  enabled: true
+  mode: "balanced"  # conservative | balanced | aggressive
+  minBalanceThreshold: 1000  # USDC
+  rebalanceFrequency: "hourly"
+  emergencyReserve: 500  # USDC
+  
+  protocols:
+    - name: "Kamino"
+      chain: "solana"
+      weight: 0.5
+      riskLevel: "low"
+      minAPY: 3.5
+      
+    - name: "Marginfi"
+      chain: "solana"
+      weight: 0.3
+      riskLevel: "medium"
+      minAPY: 5.0
+      
+    - name: "Aave"
+      chain: "base"
+      weight: 0.2
+      riskLevel: "low"
+      minAPY: 4.0
+
+# Automation settings
+automation:
+  enabled: true
+  checkInterval: "15m"
+  autoRebalance: true
+  notifyOnMove: true
+  slippageTolerance: 0.5  # percent
+
+metadata:
+  description: "Autonomous yield optimizer for idle stablecoin balances"
+  version: "1.0.0"
+  author: "Aviral"

@@ -1,0 +1,74 @@
+# Price Negotiation Agent
+# Autonomous agent-to-agent payment negotiation
+
+name: "price-negotiator"
+type: "autonomous"
+
+capabilities:
+  - negotiate_price
+  - evaluate_service
+  - execute_payment
+
+rules:
+  maxTransaction: 5000  # USDC
+  requireApprovalAbove: 2000  # USDC
+  allowedChains:
+    - solana
+
+# Negotiation strategy
+negotiation:
+  enabled: true
+  strategy: "conservative"  # aggressive | balanced | conservative
+  
+  # Price boundaries
+  maxMarkup: 1.2  # Accept up to 20% above target
+  minDiscount: 0.8  # Offer down to 80% of target
+  
+  # Negotiation rounds
+  maxRounds: 5
+  timeout: "30s"  # Per negotiation
+  
+  # AI-powered pricing
+  useDynamicPricing: true
+  considerMarketData: true
+  competitorAnalysis: true
+
+# Evaluation criteria
+evaluation:
+  factors:
+    - priceWeight: 0.4
+    - qualityWeight: 0.3
+    - speedWeight: 0.2
+    - reputationWeight: 0.1
+  
+  minimumScore: 0.7  # Don't accept below this score
+
+# Payment preferences
+payment:
+  preferredCurrency: "USDC"
+  fallbackCurrencies:
+    - "USDT"
+    - "SOL"
+  
+  paymentTerms: "immediate"  # immediate | escrow | milestone
+  escrowEnabled: true
+  escrowThreshold: 1000  # Use escrow above this amount
+
+# Automation
+automation:
+  enabled: true
+  autoNegotiate: true
+  autoExecuteBelowThreshold: 500  # Auto-pay if under 500 USDC
+  requireConfirmationAbove: 1000
+
+# Learning
+learning:
+  enabled: true
+  trackOutcomes: true
+  improveStrategy: true
+  shareInsights: false  # Privacy: don't share negotiation data
+
+metadata:
+  description: "Autonomous price negotiation with AI-driven strategy optimization"
+  version: "1.0.0"
+  author: "Aviral"

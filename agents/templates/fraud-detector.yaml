@@ -1,0 +1,71 @@
+# Fraud Detection Agent
+# ML-powered real-time fraud pattern recognition
+
+name: "fraud-detector"
+type: "risk-assessor"
+
+capabilities:
+  - detect_fraud
+  - evaluate_service
+
+rules:
+  maxTransaction: 999999999  # Can monitor any transaction
+  allowedChains:
+    - solana
+    - base
+    - ethereum
+    - arbitrum
+
+# Fraud detection models
+models:
+  - name: "velocity_check"
+    enabled: true
+    threshold: 10  # transactions per hour
+    
+  - name: "amount_anomaly"
+    enabled: true
+    stdDevThreshold: 3.0  # standard deviations from mean
+    
+  - name: "pattern_recognition"
+    enabled: true
+    modelPath: "models/fraud_detector.onnx"
+    confidenceThreshold: 0.85
+
+# Risk scoring
+riskScoring:
+  enabled: true
+  factors:
+    - velocityWeight: 0.3
+    - amountWeight: 0.25
+    - geoWeight: 0.15
+    - patternWeight: 0.3
+  
+  thresholds:
+    low: 0.3
+    medium: 0.6
+    high: 0.85
+
+# Actions based on risk level
+actions:
+  highRisk: "block"           # block | flag | log
+  mediumRisk: "flag_and_notify"
+  lowRisk: "log"
+
+# Automation
+automation:
+  enabled: true
+  realTimeMonitoring: true
+  learningMode: true  # Continuously improve from new data
+  notifyOnHighRisk: true
+
+# Alerting
+alerts:
+  channels:
+    - telegram
+    - email
+  highRiskOnly: false
+
+metadata:
+  description: "AI-powered fraud detection with real-time pattern analysis"
+  version: "1.0.0"
+  author: "Aviral"
