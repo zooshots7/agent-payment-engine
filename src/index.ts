@@ -35,6 +35,20 @@ export type {
   LiquidityPool
 } from './strategy/route-optimizer.js';
 
+// ML & Fraud Detection
+export { FraudDetector } from './ml/fraud-detector.js';
+export type {
+  Transaction,
+  GeoLocation,
+  UserProfile,
+  FraudSignal,
+  FraudAnalysis,
+  FraudConfig,
+  FraudModel,
+  FraudActions,
+  FraudThresholds
+} from './ml/fraud-detector.js';
+
 // Type exports
 export * from './types/agent.js';
 export * from './types/payment.js';
