@@ -63,6 +63,22 @@ export type {
   FraudThresholds
 } from './ml/fraud-detector.js';
 
+// Multi-Agent Swarm
+export { SwarmCoordinator } from './swarm/coordinator.js';
+export type {
+  Agent,
+  AgentRole,
+  AgentStatus,
+  Task,
+  TaskType,
+  TaskStatus,
+  SwarmConfig,
+  AgentConfig,
+  Vote,
+  ConsensusResult,
+  SwarmMetrics
+} from './swarm/coordinator.js';
+
 // Type exports
 export * from './types/agent.js';
 export * from './types/payment.js';
