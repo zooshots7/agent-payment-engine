@@ -2,8 +2,13 @@
 
 @theme {
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
-  --color-primary: #a855f7;
-  --color-bg: #000000;
+  
+  /* Refined Color Palette */
+  --color-primary: #8b5cf6;     /* Softer purple */
+  --color-accent: #06b6d4;      /* Cyan accent */
+  --color-bg: #0a0a0a;          /* Almost black */
+  --color-surface: #1a1a1a;     /* Slightly lighter */
+  --color-border: #2a2a2a;      /* Subtle borders */
   
   /* Custom Animations */
   --animate-spotlight: spotlight 2s ease .75s 1 forwards;
@@ -31,7 +36,7 @@ html {
 }
 
 body {
-  @apply bg-black text-white;
+  @apply bg-[#0a0a0a] text-white;
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,11 +45,11 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-black;
+  @apply bg-[#0a0a0a];
 }
 
 ::-webkit-scrollbar-thumb {
@@ -57,14 +62,14 @@ body {
 
 /* Selection */
 ::selection {
-  @apply bg-purple-500/30 text-white;
+  @apply bg-violet-500/20 text-white;
 }
 
 /* Smooth transitions */
 * {
-  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition-duration: 200ms;
 }
 
 /* Remove transition from animations */
@@ -74,11 +79,35 @@ body {
 
 /* Improve heading spacing */
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
 /* Better line heights */
 p {
-  line-height: 1.7;
+  line-height: 1.8;
+  color: rgb(156 163 175);
+}
+
+/* Button reset */
+button {
+  @apply focus:outline-none focus:ring-2 focus:ring-violet-500/50 rounded-lg;
+}
+
+/* Link styles */
+a {
+  @apply hover:text-violet-400 transition-colors;
 }

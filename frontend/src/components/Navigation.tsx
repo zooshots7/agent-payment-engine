@@ -9,8 +9,7 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
   const navItems = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'agents', label: 'Agents' },
-    { id: 'analytics', label: 'Analytics' },
-    { id: 'settings', label: 'Settings' }
+    { id: 'docs', label: 'Docs' }
   ]
 
   return (
@@ -18,29 +17,27 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-xl border-b border-purple-900/30"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5"
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <motion.div 
           className="flex items-center gap-3"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.2 }}
         >
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20">
+          <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-violet-700 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-xl">S</span>
           </div>
-          <div className="flex flex-col">
-            <span className="text-2xl font-bold tracking-tight leading-none">
-              <span className="text-white">SOL</span>
-              <span className="text-purple-500">-IZER</span>
+          <div>
+            <span className="text-xl font-bold tracking-tight">
+              <span className="text-white">SOL-IZER</span>
             </span>
-            <span className="text-[10px] text-gray-500 tracking-wider">PAYMENT ENGINE</span>
           </div>
         </motion.div>
 
         {/* Nav Items */}
-        <div className="flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-1">
           {navItems.map((item, index) => (
             <motion.button
               key={item.id}
@@ -48,7 +45,7 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
               className={`relative px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 activeSection === item.id
                   ? 'text-white'
-                  : 'text-gray-400 hover:text-gray-200'
+                  : 'text-gray-400 hover:text-white'
               }`}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,7 +56,7 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
               {activeSection === item.id && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-purple-500/20 border border-purple-500/30 rounded-lg"
+                  className="absolute inset-0 bg-white/5 border border-white/10 rounded-lg"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
@@ -70,18 +67,14 @@ export default function Navigation({ activeSection, setActiveSection }: Navigati
 
         {/* Status */}
         <motion.div 
-          className="flex items-center gap-3"
+          className="flex items-center gap-2"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="flex items-center gap-2 px-4 py-2 bg-gray-900/50 rounded-lg border border-gray-800">
-            <motion.div 
-              className="w-2 h-2 bg-green-500 rounded-full"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className="text-xs text-gray-400 font-medium">Online</span>
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-lg border border-white/10">
+            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-xs text-gray-400 font-medium">Live</span>
           </div>
         </motion.div>
       </div>
