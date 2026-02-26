@@ -211,7 +211,7 @@ export class FraudDetector {
    */
   private async checkVelocity(
     transaction: Transaction,
-    profile: UserProfile
+    _profile: UserProfile
   ): Promise<FraudSignal[]> {
     const signals: FraudSignal[] = [];
     const recentTransactions = this.getRecentTransactions(transaction.userId, 3600000); // 1 hour
@@ -259,7 +259,7 @@ export class FraudDetector {
    */
   private async checkAmountAnomaly(
     transaction: Transaction,
-    profile: UserProfile
+    _profile: UserProfile
   ): Promise<FraudSignal[]> {
     const signals: FraudSignal[] = [];
 
@@ -317,7 +317,7 @@ export class FraudDetector {
    */
   private async checkPatterns(
     transaction: Transaction,
-    profile: UserProfile
+    _profile: UserProfile
   ): Promise<FraudSignal[]> {
     const signals: FraudSignal[] = [];
     const recentTransactions = this.getRecentTransactions(transaction.userId, 3600000);
@@ -327,7 +327,7 @@ export class FraudDetector {
       const amounts = recentTransactions.slice(-3).map(tx => tx.amount);
       amounts.push(transaction.amount);
       
-      const diffs = [];
+      const diffs: number[] = [];
       for (let i = 1; i < amounts.length; i++) {
         diffs.push(amounts[i] - amounts[i - 1]);
       }
@@ -416,30 +416,32 @@ export class FraudDetector {
     const recentTx = this.getRecentTransactions(transaction.userId, 3600000);
     if (recentTx.length > 0 && recentTx[recentTx.length - 1].geoLocation) {
       const lastGeo = recentTx[recentTx.length - 1].geoLocation;
-      const distance = this.calculateDistance(
-        lastGeo.latitude,
-        lastGeo.longitude,
-        transaction.geoLocation.latitude,
-        transaction.geoLocation.longitude
-      );
+      if (lastGeo) {
+        const distance = this.calculateDistance(
+          lastGeo.latitude,
+          lastGeo.longitude,
+          transaction.geoLocation.latitude,
+          transaction.geoLocation.longitude
+        );
 
-      const timeDiff = (transaction.timestamp.getTime() - 
-                       recentTx[recentTx.length - 1].timestamp.getTime()) / 1000 / 3600; // hours
-      const maxPossibleSpeed = 900; // km/h (commercial flight)
+        const timeDiff = (transaction.timestamp.getTime() - 
+                         recentTx[recentTx.length - 1].timestamp.getTime()) / 1000 / 3600; // hours
+        const maxPossibleSpeed = 900; // km/h (commercial flight)
 
-      if (distance / timeDiff > maxPossibleSpeed) {
-        signals.push({
-          type: 'geo_anomaly',
-          severity: 'critical',
-          confidence: 0.95,
-          description: `Impossible travel: ${distance.toFixed(0)}km in ${timeDiff.toFixed(1)}h`,
-          metadata: {
-            distance: distance.toFixed(0),
-            timeDiff: timeDiff.toFixed(1),
-            from: `${lastGeo.city}, ${lastGeo.country}`,
-            to: `${transaction.geoLocation.city}, ${transaction.geoLocation.country}`
-          }
-        });
+        if (distance / timeDiff > maxPossibleSpeed) {
+          signals.push({
+            type: 'geo_anomaly',
+            severity: 'critical',
+            confidence: 0.95,
+            description: `Impossible travel: ${distance.toFixed(0)}km in ${timeDiff.toFixed(1)}h`,
+            metadata: {
+              distance: distance.toFixed(0),
+              timeDiff: timeDiff.toFixed(1),
+              from: `${lastGeo.city}, ${lastGeo.country}`,
+              to: `${transaction.geoLocation.city}, ${transaction.geoLocation.country}`
+            }
+          });
+        }
       }
     }
 
@@ -717,7 +719,7 @@ export class FraudDetector {
   /**
    * Learn from transaction (update models)
    */
-  private async learn(transaction: Transaction, riskScore: number): Promise<void> {
+  private async learn(_transaction: Transaction, _riskScore: number): Promise<void> {
     // In production, this would:
     // 1. Store labeled data
     // 2. Retrain models periodically

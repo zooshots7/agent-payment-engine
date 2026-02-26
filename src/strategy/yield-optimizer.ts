@@ -5,8 +5,8 @@
  * Supports Kamino, Marginfi, Drift, and other lending protocols.
  */
 
-import { Connection, PublicKey, Transaction } from '@solana/web3.js';
-import { AgentWallet } from '../core/wallet';
+import { Connection, PublicKey } from '@solana/web3.js';
+import { AgentWallet } from '../core/wallet.js';
 
 export interface Protocol {
   name: string;
@@ -144,7 +144,8 @@ export class YieldOptimizer {
    * Fetch current wallet balance
    */
   private async getBalance(): Promise<number> {
-    const address = this.wallet.getPublicKey();
+    const addressString = this.wallet.getPublicKey();
+    const address = new PublicKey(addressString);
     const balance = await this.connection.getBalance(address);
     return balance / 1e9; // Convert lamports to SOL (or USDC equivalent)
   }

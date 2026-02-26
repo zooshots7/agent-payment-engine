@@ -311,7 +311,7 @@ export class SwarmCoordinator {
   /**
    * Collect vote from an agent
    */
-  private async collectVote(agent: Agent, decision: string, data: any): Promise<Vote> {
+  private async collectVote(agent: Agent, _decision: string, _data: any): Promise<Vote> {
     // Simulate agent decision-making
     await new Promise(resolve => setTimeout(resolve, 10));
 

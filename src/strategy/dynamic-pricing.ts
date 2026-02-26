@@ -377,9 +377,9 @@ export class DynamicPricing {
    * Apply custom factor
    */
   private applyCustomFactor(
-    marketData: MarketData,
-    currentPrice: number,
-    factor: AdjustmentFactor
+    _marketData: MarketData,
+    _currentPrice: number,
+    _factor: AdjustmentFactor
   ): { impact: number; score: number } {
     // Placeholder for custom logic
     // In production, this would execute custom pricing rules
@@ -461,7 +461,7 @@ export class DynamicPricing {
    */
   private estimateImpact(
     priceChange: number,
-    marketData: MarketData
+    _marketData: MarketData
   ): { demandChange: number; revenueChange: number; marginChange: number } {
     // Price elasticity estimate (default: -1.5, meaning 1% price increase = 1.5% demand decrease)
     const elasticity = -1.5;

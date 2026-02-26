@@ -32,7 +32,14 @@ export class SolanaManager {
     this.commitment = config.commitment || 'confirmed';
 
     // Use custom RPC URL or default cluster URL
-    const rpcUrl = config.rpcUrl || clusterApiUrl(config.network);
+    let rpcUrl: string;
+    if (config.rpcUrl) {
+      rpcUrl = config.rpcUrl;
+    } else if (config.network === 'localnet') {
+      rpcUrl = 'http://localhost:8899';
+    } else {
+      rpcUrl = clusterApiUrl(config.network);
+    }
     this.connection = new Connection(rpcUrl, this.commitment);
   }
 
@@ -140,8 +147,9 @@ export class SolanaManager {
    * Get transaction details
    */
   async getTransaction(signature: string): Promise<unknown> {
+    const commitment = this.commitment === 'processed' ? 'confirmed' : this.commitment;
     return await this.connection.getTransaction(signature, {
-      commitment: this.commitment,
+      commitment: commitment as 'confirmed' | 'finalized',
       maxSupportedTransactionVersion: 0,
     });
   }

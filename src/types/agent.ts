@@ -51,7 +51,7 @@ export interface Agent {
 export interface AgentMessage {
   from: string;
   to: string;
-  type: 'payment_request' | 'payment_response' | 'negotiation' | 'status';
+  type: 'payment_request' | 'payment_response' | 'negotiation' | 'status' | 'approval_request';
   payload: unknown;
   timestamp: Date;
 }

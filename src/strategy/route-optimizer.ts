@@ -9,7 +9,8 @@
  * - Slippage tolerance
  */
 
-import { Connection, PublicKey } from '@solana/web3.js';
+// Connection type available but not currently used
+// import { Connection } from '@solana/web3.js';
 
 export type ChainId = 'solana' | 'base' | 'ethereum' | 'arbitrum' | 'polygon' | 'optimism';
 
@@ -82,6 +83,7 @@ export class RouteOptimizer {
   private chains: Map<ChainId, Chain> = new Map();
   private bridges: Map<string, Bridge> = new Map();
   private gasPrices: Map<ChainId, GasPrice> = new Map();
+  // @ts-expect-error - Reserved for future liquidity pool integration
   private liquidityPools: Map<string, LiquidityPool> = new Map();
   private config: RouteConfig;
 
