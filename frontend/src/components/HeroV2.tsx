@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { GridBackground, Spotlight } from './ui/GridBackground'
 import { TextGradient, TextShine } from './ui/TextGradient'
 import { AnimatedCard } from './ui/AnimatedCard'
-import { layout, typography, components, animations, viewport } from '../lib/utils'
+import { layout, typography, components, animations } from '../lib/utils'
 
 export default function HeroV2() {
   return (

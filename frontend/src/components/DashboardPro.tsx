@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown, Activity, DollarSign, Zap, Users } from 'lucide-react'
-import { AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 const revenueData = [
   { time: '00:00', value: 4200 },
